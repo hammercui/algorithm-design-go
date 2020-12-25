@@ -1,0 +1,11 @@
+.git
+.idea
+go.sum
+*/logout/
+*.log
+/apps/activity/main
+/apps/temp/main
+apps/activity/logout/*.log
+/apps/activity/model/gormt
+.vscode
+third/gormt/gormt
