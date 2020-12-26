@@ -19,25 +19,25 @@ import "errors"
 二叉查找树的特点：对于每一个节点X,左子树中所有项的值小于X中的值，而它的右子树种所有项的值大于X中的值。
 */
 
-type NodeValue struct {
+type TreeNodeValue struct {
 	Key   int
 	Value interface{}
 }
 
 //树节点
-type Node struct {
-	Data  *NodeValue //节点的值
-	Left  *Node
-	Right *Node
+type TreeNode struct {
+	Data  *TreeNodeValue //节点的值
+	Left  *TreeNode
+	Right *TreeNode
 }
 
 type BSTree struct {
-	Root *Node
+	root *TreeNode
 }
 
 func NewBSTree() *BSTree {
 	ins := &BSTree{
-		Root: &Node{
+		root: &TreeNode{
 			Data:  nil,
 			Left:  nil,
 			Right: nil,
@@ -46,45 +46,55 @@ func NewBSTree() *BSTree {
 	return ins
 }
 
+func (p *BSTree) GetRoot() *TreeNode {
+	return p.root
+}
+func (p *BSTree) SetRoot(node *TreeNode) {
+	p.root = node
+}
+
 //插入
-func (p *BSTree) Add(data *NodeValue) {
+func (p *BSTree) Add(data *TreeNodeValue) bool{
+	if data == nil || data.Value == nil{
+		return false
+	}
 	//若root节点是空，则将data所指節点作为根節点插入，否则：
-	p.add(p.Root, data)
+	return p.add(p.root, data)
 }
 
 //插入实现
-func (p *BSTree) add(root *Node, data *NodeValue) {
+func (p *BSTree) add(root *TreeNode, data *TreeNodeValue) bool{
 	//若root节点是空，则将data所指節点作为根節点插入，否则：
 	if root.Data == nil {
 		root.Data = data
-		return
+		return true
 	}
 	//若data等于根節点的数据域之值，则返回，否则：
 	if data.Key == root.Data.Key {
-		return
+		return true
 	}
 	//若data小于根節点的数据域之值，则把data插入到左子树中，否则：
 	if data.Key < root.Data.Key {
 		if root.Left == nil {
-			root.Left = &Node{Data: nil}
+			root.Left = &TreeNode{Data: nil}
 		}
-		p.add(root.Left, data)
+		return p.add(root.Left, data)
 	} else {
 		if root.Right == nil {
-			root.Right = &Node{Data: nil}
+			root.Right = &TreeNode{Data: nil}
 		}
 		//把data插入到右子树中。
-		p.add(root.Right, data)
+		return p.add(root.Right, data)
 	}
 }
 
 //查询
-func (p *BSTree) Search(key int) (*NodeValue, error) {
-	return p.search(p.Root, key)
+func (p *BSTree) Search(key int) (*TreeNodeValue, error) {
+	return p.search(p.root, key)
 }
 
 //查询实现
-func (p *BSTree) search(root *Node, key int) (*NodeValue, error) {
+func (p *BSTree) search(root *TreeNode, key int) (*TreeNodeValue, error) {
 	if root.Data == nil {
 		return nil, errors.New("key not exist!")
 	}
@@ -99,23 +109,4 @@ func (p *BSTree) search(root *Node, key int) (*NodeValue, error) {
 	}
 }
 
-func PreOrder(tree *BSTree) []int {
-	values := make([]int, 0, 50)
-	//进行前序遍历，把结果输出，看看二叉查找树构造是否正确
-	current := tree.Root
 
-	if current == nil {
-		return values
-	}
-
-	leftTree := new(BSTree)
-	leftTree.Root = current.Left
-	rightTree := new(BSTree)
-	rightTree.Root = current.Right
-	values = append(values, current.Data.Key)
-	left := PreOrder(leftTree)
-	right := PreOrder(rightTree)
-	values = append(values, left...)
-	values = append(values, right...)
-	return values
-}
