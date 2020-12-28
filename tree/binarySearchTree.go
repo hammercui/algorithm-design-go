@@ -54,8 +54,8 @@ func (p *BSTree) SetRoot(node *TreeNode) {
 }
 
 //插入
-func (p *BSTree) Add(data *TreeNodeValue) bool{
-	if data == nil || data.Value == nil{
+func (p *BSTree) Add(data *TreeNodeValue) bool {
+	if data == nil {
 		return false
 	}
 	//若root节点是空，则将data所指節点作为根節点插入，否则：
@@ -63,7 +63,7 @@ func (p *BSTree) Add(data *TreeNodeValue) bool{
 }
 
 //插入实现
-func (p *BSTree) add(root *TreeNode, data *TreeNodeValue) bool{
+func (p *BSTree) add(root *TreeNode, data *TreeNodeValue) bool {
 	//若root节点是空，则将data所指節点作为根節点插入，否则：
 	if root.Data == nil {
 		root.Data = data
@@ -108,5 +108,3 @@ func (p *BSTree) search(root *TreeNode, key int) (*TreeNodeValue, error) {
 		return p.search(root.Right, key)
 	}
 }
-
-

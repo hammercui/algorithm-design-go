@@ -48,6 +48,32 @@ func TestBSTree_SetRoot(t *testing.T) {
 	}
 }
 
+func TestBSTree_bfsPrint(t *testing.T)  {
+	tree := NewBSTree()
+	tree.Add(&TreeNodeValue{
+		Key:10,
+	})
+	tree.Add(&TreeNodeValue{
+		Key:5,
+	})
+	tree.Add(&TreeNodeValue{
+		Key:6,
+	})
+	tree.Add(&TreeNodeValue{
+		Key:1,
+	})
+	tree.Add(&TreeNodeValue{
+		Key:11,
+	})
+	tree.Add(&TreeNodeValue{
+		Key:21,
+	})
+	tree.Add(&TreeNodeValue{
+		Key:32,
+	})
+	PrintBFS(tree)
+}
+
 
 
 func toJsonStr(v interface{}) string {

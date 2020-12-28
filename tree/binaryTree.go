@@ -14,6 +14,6 @@ package tree
 type BinaryTree interface {
 	GetRoot() *TreeNode
 	SetRoot(node *TreeNode)
-	Add(data *TreeNodeValue)
+	Add(data *TreeNodeValue) bool
 	Search(key int) (*TreeNodeValue, error)
 }
