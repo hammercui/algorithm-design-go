@@ -11,7 +11,9 @@
  */
 package tree
 
-import "errors"
+import (
+	"errors"
+)
 
 /*
 二叉搜索树
@@ -86,6 +88,85 @@ func (p *BSTree) add(root *TreeNode, data *TreeNodeValue) bool {
 		//把data插入到右子树中。
 		return p.add(root.Right, data)
 	}
+}
+
+//删除
+func (p *BSTree) Del(key int) bool {
+	if p == nil || p.root.Data == nil {
+		return false
+	}
+	return p.delBsf(nil, p.root, key)
+}
+
+//深度优先遍历，找到待删除
+func (p *BSTree) delBsf(father *TreeNode, node *TreeNode, key int) bool {
+	if node == nil || node.Data == nil {
+		return false
+	}
+	//根节点
+	if father == nil {
+		if node == nil || node.Data == nil {
+			return false
+		} else if node.Data.Key == key {
+			p.root = nil
+			return true
+		}
+	}
+
+	if key < node.Data.Key {
+		return p.delBsf(node, node.Left, key)
+	} else if key > node.Data.Key {
+		return p.delBsf(node, node.Right, key)
+	} else {
+		return p.delImp(father, node)
+	}
+}
+
+func (p *BSTree) delImp(father *TreeNode, node *TreeNode) bool {
+	//1 node是叶子节点，直接删除
+	if node.Left == nil && node.Right == nil {
+		if father.Left.Data.Key == node.Data.Key {
+			father.Left = nil
+			return true
+		}
+		if father.Right.Data.Key == node.Data.Key {
+			father.Right = nil
+			return true
+		}
+	} else if node.Right == nil {
+		//2 node只有左字树或者右子树，node的l或者r,直接成为双亲节点的l或者r
+		//left不空 right空
+		father.Left = node.Left
+	} else if node.Left == nil {
+		//left空，right不空
+		father.Right = node.Right
+	} else {
+		//3 node左右都不为空。
+		//3.1 node的左子节点nl有右子节点nlr，
+		//		找到右最下的节点nlrmax,该节点为node前驱节点，即仅次于node节点大小的节点。
+		//      然后nlrmax赋值给node,然后nlrmax此时已经没有右节点，把它剩余的左分支挂载与父节点的右分支。相当于删除了nlrmax。
+		nl := node.Left
+		if nl.Right != nil {
+			nlrmaxFather := nl
+			nlrmax := nl.Right
+			for nlrmax.Right != nil {
+				nlrmaxFather = nlrmax
+				nlrmax = nlrmax.Right
+			}
+			node.Data = &TreeNodeValue{
+				Key:   nlrmax.Data.Key,
+				Value: nlrmax.Data.Value,
+			}
+			nlrmaxFather.Right = nlrmax.Left
+		} else {
+			//3.2 否
+			//     nl提为node的父亲的左子树。node的右节点变为nl的右节点。相当于删除了node
+			father.Left = nl
+			nl.Right = node.Right
+		}
+	}
+
+	return true
 }
 
 //查询
