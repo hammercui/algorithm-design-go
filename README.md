@@ -18,5 +18,7 @@
     - MD5
     - SHA512
     - RSA
+    - 随机
+        - Mersenne twister:梅森旋转算法mt19937
 + time: 时间相关
     
