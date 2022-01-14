@@ -38,7 +38,8 @@ func main() {
 		}
 	}
 	fmt.Println("endTokenId",endTokenId)
-	endDirName  := start + 1000
+	offset := 300
+	endDirName  := start + offset
 	if endDirName>endTokenId{
 		endDirName = endTokenId
 	}
@@ -46,22 +47,23 @@ func main() {
 	notExistMsg := ""
 	//2 每1000，新建上一级，并移动到上一级
 	for i := 0;i<=endTokenId-start;i++ {
+		curTokenId := start+i
 		//1000次，检测路径
-		if (i+1) % 1000 == 0{
-			end := start + i + 999
+		if (i+1) % offset == 0{
+			end := curTokenId + offset
 			if end > endTokenId{
 				end = endTokenId
 			}
-			outputDir = checkParentDir(parentPath,start,end)
+			outputDir = checkParentDir(parentPath,curTokenId,end)
 		}
-		curTokenId := start+i
+
 		//gif路径
 		gifPath := fmt.Sprintf("%s/%d.gif",curPath,curTokenId)
 		fmt.Println("gifPath",gifPath)
 		//3 打印缺失的图片
 		outputPath := fmt.Sprintf("%s/%d.gif",outputDir,curTokenId)
 		if _,err := os.Stat(gifPath);os.IsNotExist(err){
-			notExistMsg = fmt.Sprintf("%s\n%s",notExistMsg,gifPath)
+			notExistMsg = fmt.Sprintf("%s%s\n\r",notExistMsg,gifPath)
 			continue
 		}
 		//4 git move to out
