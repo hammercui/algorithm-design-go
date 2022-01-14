@@ -9,3 +9,6 @@ apps/activity/logout/*.log
 /apps/activity/model/gormt
 .vscode
 third/gormt/gormt
+/tools/files/Thumbs.db
+/tools/files/Thumbs.db:encryptable
+/tools/files/fileMove

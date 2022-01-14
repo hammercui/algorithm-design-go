@@ -10,7 +10,12 @@
     - binarySearchTree:二叉搜索树
     - 平衡二叉树（AVL）
     - 红黑树
-+ queue:队列    
++ queue:队列
+
+## 算法
++ dp:dynamic programming动态规划问题
+    - lis:最长上升子序列
+    - maxArraySum:最大子序和    
 
 ## 工具
 
