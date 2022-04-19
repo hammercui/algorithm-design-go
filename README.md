@@ -19,8 +19,7 @@
     - maxArraySum:最大子序和    
     - uniquePath:最多路径问题?
     
-## 工具
-
+## 工具 tools
 + crypto:密码学
     - MD5?
     - SHA512?
@@ -28,4 +27,10 @@
     - 随机
         - Mersenne twister:梅森旋转算法mt19937
 + time: 时间相关
-    
+
+## 语言特性 features
++ slice:切片
++ options: 可选配置项
+
+## 乐扣 letcode
++ string_reverse
