@@ -19,6 +19,9 @@ func update(a []int)  {
 	fmt.Println("update",a)
 }
 
+/**
+slice新切片 长度=high-low 容量=max-low
+ */
 func TestSplit(t *testing.T)  {
 	slice1 := make([]int, 0)
 	slice2 := make([]int, 1, 3)
@@ -40,5 +43,4 @@ func TestSplit(t *testing.T)  {
 	fmt.Printf("%s = %v,\t len = %d, cap = %d\n", "slice7", slice7, len(slice7), cap(slice7))
 	fmt.Printf("%s = %v,\t len = %d, cap = %d\n", "slice8", slice8, len(slice8), cap(slice8))
 	fmt.Printf("%s = %v,\t len = %d, cap = %d\n", "slice9", slice9, len(slice9), cap(slice9))
-
 }

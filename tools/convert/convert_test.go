@@ -9,4 +9,5 @@ func Test_str2byte(t *testing.T)  {
 	outStr := BytesToString(bytes)
 	t.Log("bytes",bytes)
 	t.Log("outStr",outStr)
+	//var a = [...]int{1,2,3}
 }
