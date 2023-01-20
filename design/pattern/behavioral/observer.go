@@ -2,6 +2,7 @@ package behavioral
 
 import (
 	"fmt"
+	"reflect"
 	"sync"
 )
 
@@ -12,6 +13,8 @@ type Function func(args ...interface{})
 type EventBus interface {
 	Subscribe(topic string, handler Action) error
 	SubscribeFunc(topic string, handler Function) error
+	Remove(topic string, handler Action)
+	RemoveFunc(topic string, handler Function)
 	Publish(topic string,args ...interface{})
 }
 
@@ -30,7 +33,7 @@ func NewAsyncEventBus() *AsyncEventBus {
 	}
 }
 
-func (p *AsyncEventBus) SubscribeAction(topic string, handler Action) error {
+func (p *AsyncEventBus) Subscribe(topic string, handler Action) error {
 	p.lock.Lock()
 	defer p.lock.Unlock()
 	if s,ok := p.actions[topic];ok {
@@ -52,6 +55,41 @@ func (p *AsyncEventBus) SubscribeFunc(topic string, handler Function) error {
 		p.functions[topic] = []Function{handler}
 	}
 	return nil
+}
+
+
+func (p *AsyncEventBus) Remove(topic string, handler Action) {
+	p.lock.Lock()
+	defer p.lock.Unlock()
+	if s,ok := p.actions[topic];ok {
+		for i,item := range s{
+			if reflect.ValueOf(item).Pointer() == reflect.ValueOf(handler).Pointer(){
+				p.actions[topic] = append(s[:i],s[i+1:]...)
+				fmt.Printf("%s remove success \n",topic)
+				return
+			}
+		}
+		fmt.Printf("action not exist %s \n",topic)
+	}else{
+		fmt.Printf("topic not exist %s \n",topic)
+	}
+}
+
+func (p *AsyncEventBus) RemoveFunc(topic string, handler Function) {
+	p.lock.Lock()
+	defer p.lock.Unlock()
+	if s,ok := p.functions[topic];ok {
+		for i,item := range s{
+			if reflect.ValueOf(item).Pointer() == reflect.ValueOf(handler).Pointer(){
+				p.functions[topic] = append(s[:i],s[i+1:]...)
+				fmt.Printf("%s remove success \n",topic)
+				return
+			}
+		}
+		fmt.Printf("function not exist %s \n",topic)
+	}else{
+		fmt.Printf("topic not exist %s \n",topic)
+	}
 }
 
 func (p *AsyncEventBus) Publish(topic string, args ...interface{}) {
