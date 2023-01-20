@@ -6,6 +6,7 @@ import "fmt"
 基础函数式实现的责任链模式
 1 定义一个医院引擎
 2 每个病人持有一个医院引擎，每个人的看病流程不一样，因此engine可自定义
+V2: 函数式的方式实现
  */
 type HandlerFunc func(*patientV2)
 type patientV2 struct {
