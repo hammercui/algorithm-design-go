@@ -1,7 +1,9 @@
 package creational
 
 import "sync"
-
+/**
+懒汉模式获得单例
+ */
 type LazyObject struct {
 	Name string
 }
