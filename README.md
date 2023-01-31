@@ -1,20 +1,37 @@
 # algorithm-design-go
 >golang算法，数据结构，工具库汇总
 ## 命名规范
-1 包名
+#### 1 包名
 必须是小写，可以允许下划线 比如net_work 
-2 类名
+#### 2 类名
 必须是小写，可以允许下划线 比如go_dialog.go ，必须是名词或动名词
-3 接口
+#### 3 接口
 但函数接口，以er后缀，整体必须是名词
-4 函数和方法名
+#### 4 函数和方法名
 动词或动词短语
 
+## 设计模式
+### 行为型
+* chainOfResponsibility
+* observer
+* strategy
+* templateMethod
+### 创造型
+* abstractFactory
+* prototype 
+* singleton
+* builder(函数式语言用的比较少)
+### 函数式
+* option
+### 结构型
+* composite
+* proxy
+* decorator
 ## 数据结构
 
 + list:链表
     - singleList:单向链表
-    - 跳表?
+    - skipList:跳表,某些场景可以取代hashMap
 + tree:树
     - binaryTree: 二叉树
     - binarySearchTree:二叉搜索树
