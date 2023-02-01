@@ -27,6 +27,7 @@
 * composite
 * proxy
 * decorator
+* adapter
 ## 数据结构
 
 + list:链表
