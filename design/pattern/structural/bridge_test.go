@@ -13,6 +13,9 @@ func TestBridged(t *testing.T) {
 
 	//2 radio实例化
 	radio :=&Radio{}
+
+
+
 	abstraction.SetDevice(radio)
 	abstraction.volumeUp()
 }
