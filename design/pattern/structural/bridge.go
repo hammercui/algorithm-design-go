@@ -1,4 +1,7 @@
 package main
+
+import "fmt"
+
 /**
 结构型设计模式
 桥接模式，是一种前置设计模式，用来拆分app的维度。其内部可使用其他设计模式
@@ -12,6 +15,8 @@ package main
 3 TV&Radio类： 属于implementation层的实现
 4 AdvancedRemote类：属于abstraction的子类
  */
+
+//implementation interface
 type Device interface {
 	isEnable() bool
 	getVolume() int
@@ -19,6 +24,7 @@ type Device interface {
 	getChannel() int
 	setChannel(channel int)
 }
+//implementation base
 type BaseDevice struct {
 	percent int
 	channel int
@@ -38,6 +44,7 @@ func (p *TV) getVolume() int{
 
 func (p *TV) setVolume(percent int) {
 	p.percent = percent
+	fmt.Printf("TV volume set to %v\n", p.percent)
 }
 
 func (p *TV) getChannel() int {
@@ -62,6 +69,7 @@ func (p *Radio) getVolume() int {
 
 func (p *Radio) setVolume(percent int) {
 	p.percent = percent
+	fmt.Printf("Radio volume set to %v\n", p.percent)
 }
 
 func (p *Radio) getChannel() int {
@@ -72,7 +80,34 @@ func (p *Radio) setChannel(channel int) {
 	p.channel = channel
 }
 
+//abstraction based
+type BaseRemote struct {
+	device Device
+}
+func (p *BaseRemote) SetDevice(device Device){
+	p.device = device
+}
+func (p *BaseRemote) volumeUp(){
+	volume := p.device.getVolume()
+	volume++
+	p.device.setVolume(volume)
+}
+func (p *BaseRemote) volumeDown(){
+	volume := p.device.getVolume()
+	if volume > 0 {
+		volume--
+	}
+	p.device.setVolume(volume)
+}
 
+//abstraction advanced
+type AdvancedRemote struct {
+	BaseRemote
+}
+//静音
+func (p *AdvancedRemote) mute()  {
+	p.device.setVolume(0)
+}
 
 
 
