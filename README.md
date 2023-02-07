@@ -12,22 +12,27 @@
 
 ## 设计模式
 ### 行为型
-* chainOfResponsibility
-* observer
-* strategy
-* templateMethod
+* chainOfResponsibility 责任链
+* observer 观察者
+* strategy 策略
+* templateMethod 模板方法
+* command 命令
+* iterator 迭代器
+* memento 备忘录
+* state 状态机
+* visitor 访问者
 ### 创造型
-* abstractFactory
-* prototype 
-* singleton
-* builder(函数式语言用的比较少)
+* abstractFactory 抽象工厂
+* prototype 原型
+* singleton 单例
+* builder(函数式语言用的比较少) 构建者
 ### 函数式
-* option
+* option 可选项
 ### 结构型
-* composite
-* proxy
-* decorator
-* adapter
+* composite 组合
+* proxy 代理
+* decorator 装饰器
+* adapter 适配器
 ## 数据结构
 
 + list:链表
