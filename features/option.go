@@ -1,4 +1,4 @@
-package main
+package features
 
 import "log"
 
@@ -45,7 +45,7 @@ func NewConn(options ...Options) *Config  {
 	return conf
 }
 
-func main()  {
+func test()  {
 	//传入自定义可选参数
 	var options = []Options{
 		WithIP("127.0.0.1"),

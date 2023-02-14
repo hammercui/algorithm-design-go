@@ -1,4 +1,4 @@
-package main
+package apibench
 
 import (
 	"bytes"
@@ -13,7 +13,7 @@ import (
 var wg sync.WaitGroup //定义一个同步等待的组
 var wgPost sync.WaitGroup
 
-func main()  {
+func bench()  {
 
 	baseHost := "http://localhost:7101/api"
 	//baseHost = "http://120.55.168.35:7101/api"

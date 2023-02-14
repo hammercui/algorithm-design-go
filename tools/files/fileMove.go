@@ -1,4 +1,4 @@
-package main
+package files
 
 import (
 	"fmt"
@@ -11,7 +11,7 @@ import (
 	"strings"
 )
 
-func main() {
+func start() {
 	start := 10601
 	curPath := getCurrPath()
 	fmt.Println("curPath:", curPath)
@@ -75,7 +75,7 @@ func main() {
 	checkFileCreate(errLogPath)
 	errLogFile,_ := os.OpenFile(errLogPath,2,0666)
 	if _,err := io.WriteString(errLogFile,notExistMsg);err != nil{
-		panic(err)
+		panic(err.Error())
 	}
 }
 

@@ -1,15 +1,10 @@
-package main
+package letcode
 
 import "log"
 
 /**
 字符串翻转
  */
-
-func main()  {
-	reverse()
-}
-
 var str = "hello,world"
 
 func reverse()   {

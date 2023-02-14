@@ -12,7 +12,7 @@ type Classes struct {
 }
 //student 构造时传入
 //可以与classes拥有不同的生命周期
-func main()  {
+func test()  {
 	student1 := StudentA{}
 	classes1 := Classes{
 		student: &student1,

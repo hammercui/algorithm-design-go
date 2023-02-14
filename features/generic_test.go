@@ -1,4 +1,4 @@
-package main
+package features
 
 import (
 	"fmt"
@@ -9,18 +9,25 @@ import (
 泛型测试
  */
 
-func TestAny(t *testing.T)  {
-	a := func(a any) {
-		switch a.(type) {
-		case int:
-			fmt.Println("int ")
-		case float64:
-			fmt.Println("float64")
-		case string:
-			fmt.Println("string")
-		}
+func TestFindIndex(t *testing.T)  {
+
+	sel := 1
+	arr := []int{1,2,3,4,5}
+	pos := 0
+	if pos == findIndex(arr, sel){
+		t.Log("success")
+	}else{
+		t.Fatal("findIndex error")
 	}
-	a(1)
-	a(1.111)
-	a("aaa")
+}
+
+func TestContacts(t *testing.T) {
+
+	a := []int{1,2}
+	b := []int{3,4}
+	fmt.Println(concatenate(a, b))
+
+	c := []string{"a","b"}
+	d := []string{"c","d"}
+	fmt.Println(concatenate(c,d))
 }
